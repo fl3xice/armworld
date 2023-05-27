@@ -1,11 +1,21 @@
-import { GameObject } from "./lib/object";
-import { Paper, PaperDefault } from "./objects/paper";
-import { Player, PlayerDefault } from "./objects/player";
+import { RarityObject } from "./lib/object";
+import { Pin } from "./lib/pin";
+import { InventoryDefault } from "./objects/inventory";
+import { PaperDefault } from "./objects/paper";
+import { PlayerDefault } from "./objects/player";
 
 const player = new PlayerDefault("John Doe", "johndoe_");
 const paper = new PaperDefault();
+const inventory = new InventoryDefault();
+const inventory2 = new InventoryDefault();
 
-paper.use(player, "Hello");
-paper.use(player, ["nice", "ass", "bro"]);
+const InventoryPin = new Pin<InventoryDefault>();
 
-console.log(paper.getText());
+InventoryPin.pin(player, inventory);
+InventoryPin.pin(player, inventory2);
+
+const res = InventoryPin.getPinsByActor(player)?.filter(
+  (inventory) => inventory.getRarity() > RarityObject.Default
+);
+
+console.log(res);

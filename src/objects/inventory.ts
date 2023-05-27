@@ -1,5 +1,5 @@
-import { Interacting, InteractionObject } from "../lib/interaction";
-import { GameObject, RarityObject } from "../lib/object";
+import { Actor, InteractionObject, rUniqueId } from "../lib/interaction";
+import { ArmObject, GameObject, RarityObject } from "../lib/object";
 import { Weight } from "../lib/units";
 
 interface Inventory {
@@ -10,11 +10,14 @@ interface Inventory {
 }
 
 export class InventoryDefault
+  extends ArmObject
   implements GameObject, Inventory, InteractionObject<null, void>
 {
-  constructor() {}
+  constructor() {
+    super();
+  }
 
-  use(i: Interacting, data: null): void {
+  use(i: Actor, data: null): void {
     throw new Error("Method not implemented.");
   }
 

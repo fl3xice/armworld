@@ -1,5 +1,5 @@
-import { Interacting, InteractionObject } from "../lib/interaction";
-import { GameObject, RarityObject } from "../lib/object";
+import { Actor, InteractionObject } from "../lib/interaction";
+import { ArmObject, GameObject, RarityObject } from "../lib/object";
 import { Weight, gramsTo } from "../lib/units";
 
 export enum StyleTextPaper {
@@ -35,6 +35,7 @@ export interface Paper {
 }
 
 export class PaperDefault
+  extends ArmObject
   implements GameObject, Paper, InteractionObject<string | string[], void>
 {
   private style: StylePaper = StylePaper.A4;
@@ -67,6 +68,8 @@ export class PaperDefault
     styleText?: StyleTextPaper;
     textInitial?: string;
   }) {
+    super();
+
     if (options) {
       if (options.density) {
         this.density = options.density;
@@ -125,7 +128,7 @@ export class PaperDefault
     return this.styleText;
   }
 
-  use(i: Interacting, data: string | string[]): void {
+  use(i: Actor, data: string | string[]): void {
     this.text += typeof data == "object" ? data.join("\n") : data;
   }
 

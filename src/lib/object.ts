@@ -1,3 +1,4 @@
+import { rUniqueId } from "./interaction";
 import { Weight } from "./units";
 
 export enum RarityObject {
@@ -16,4 +17,16 @@ export interface GameObject {
   getName(): string;
   getDescription(): string;
   getRarity(): RarityObject;
+}
+
+export abstract class ArmObject {
+  private readonly id: string;
+
+  constructor() {
+    this.id = rUniqueId();
+  }
+
+  getId(): string {
+    return this.id;
+  }
 }
